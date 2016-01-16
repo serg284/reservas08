@@ -156,9 +156,16 @@ int totalReservasN = 0;
                 totalAnulacoes++;
             }    
             //aqui, construir uma maneira de somar o valor dos Ns = reservas multiplas.
-            if (reservaCondicao[k] == 'A') {
-                totalReservasN++;
-            }    
+            if (reservaCondicao[k] >= '0' && reservaCondicao[k] <= '9') {
+                System.out.println(reservaCondicao[k]);
+    
+            int reservaCondicaoInt = Integer.parseInt(String.valueOf(reservaCondicao[k]));   
+            //source: http://stackoverflow.com/questions/2683324/java-char-array-to-int
+            totalReservasN+=reservaCondicaoInt;
+            }
+     
+    
+    
     }
         System.out.println("total Reservas:" + totalReservas);            
         System.out.println("Total Compras:" + totalCompras);   
@@ -166,6 +173,7 @@ int totalReservasN = 0;
         System.out.println("Total ReservasN:" + totalReservasN);   
 
 
+        
 
 
 
