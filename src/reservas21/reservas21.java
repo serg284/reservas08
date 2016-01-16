@@ -8,24 +8,24 @@ public class reservas21 {
     public static void main(String[] args) {
 
         //arrays de salas.txt
-        int[]       salaIdSala = new int[100];                 //coluna1
-        String[]    salaNomeSala = new String[100];            //coluna2
-        int[]       salaFilas = new int[100];                  //coluna3
-        int[]       salaLugares = new int[100];                //coluna4
-        String[]    salaNomeEspetaculo = new String[100];      //coluna5
-        int[]       salaPrecoBilhete = new int[100];           //coluna6
+        int[]       salaIdSala = new int[100];              //coluna1
+        String[]    salaNomeSala = new String[100];         //coluna2
+        int[]       salaFilas = new int[100];               //coluna3
+        int[]       salaLugares = new int[100];             //coluna4
+        String[]    salaNomeEspetaculo = new String[100];   //coluna5
+        int[]       salaPrecoBilhete = new int[100];        //coluna6
         //novos arrays
         int[]       salaTotalLugares = new int[100];        
         
         //arrays de reservas.txt
-        int[]       reservaIdSala = new int[100];              //coluna1
-        String[]    reservaNomeEspetaculo = new String[100];   //coluna2
-        char[]      reservaCondicao = new char[100];           //coluna3
-        int[]       reservaFila = new int[100];                //coluna4
-        int[]       reservaLugar = new int[100];               //coluna5
-        int[]       reservaDia = new int[100];                 //coluna6
-        int[]       reservaMes = new int[100];                 //coluna7
-        char[]      reservaSessao = new char[100];             //coluna8
+        int[]       reservaIdSala = new int[100];           //coluna1
+        String[]    reservaNomeCliente = new String[100];   //coluna2
+        char[]      reservaCondicao = new char[100];        //coluna3
+        int[]       reservaFila = new int[100];             //coluna4
+        int[]       reservaLugar = new int[100];            //coluna5
+        int[]       reservaDia = new int[100];              //coluna6
+        int[]       reservaMes = new int[100];              //coluna7
+        char[]      reservaSessao = new char[100];          //coluna8
 
         //arrays de clientes
         String[]    clientes = new String[100];   //clientes. precisamos para mostrar DE QUEM sao as reservas.
@@ -108,7 +108,7 @@ public class reservas21 {
         System.out.println("*** reservas ***");
         for( j = 0;  scannerReservas.hasNextLine();  j++ ){
             reservaIdSala[j] = scannerReservas.nextInt();           //coluna1
-            reservaNomeEspetaculo[j] = scannerReservas.next();      //coluna2
+            reservaNomeCliente[j] = scannerReservas.next();         //coluna2
             reservaCondicao[j] = scannerReservas.next().charAt(0);  //coluna3
             reservaFila[j]  = scannerReservas.nextInt();            //coluna4
             reservaLugar[j]  = scannerReservas.nextInt();           //coluna5
@@ -124,14 +124,14 @@ public class reservas21 {
         // reservas.txt : output para ecra
         for( i = 0;  i < num_reservas ;  i++ ){
             System.out.print  ( "L" + i + ":\t") ;
-            System.out.print  ( "C1:" + reservaIdSala[i]          + "\t");
-            System.out.print  ( "C2:" + reservaNomeEspetaculo[i]  + "\t");
-            System.out.print  ( "C3:" + reservaCondicao[i]        + "\t");
-            System.out.print  ( "C4:" + reservaFila[i]            + "\t");
-            System.out.print  ( "C5:" + reservaLugar[i]           + "\t");
-            System.out.print  ( "C6:" + reservaDia[i]             + "\t");
-            System.out.print  ( "C7:" + reservaMes[i]             + "\t");
-            System.out.println( "C8:" + reservaSessao[i]          + "\t");
+            System.out.print  ( "C1:" + reservaIdSala[i]            + "\t");
+            System.out.print  ( "C2:" + reservaNomeCliente[i]       + "\t");
+            System.out.print  ( "C3:" + reservaCondicao[i]          + "\t");
+            System.out.print  ( "C4:" + reservaFila[i]              + "\t");
+            System.out.print  ( "C5:" + reservaLugar[i]             + "\t");
+            System.out.print  ( "C6:" + reservaDia[i]               + "\t");
+            System.out.print  ( "C7:" + reservaMes[i]               + "\t");
+            System.out.println( "C8:" + reservaSessao[i]            + "\t");
         }
 
         //output
