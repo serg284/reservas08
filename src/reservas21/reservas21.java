@@ -159,7 +159,8 @@ public class reservas21 {
 
         for (int sala = 0; sala < num_salas ; sala++) {
                   
-            
+            System.out.println("teste");
+            System.out.println("teste2");
         }
         
         
