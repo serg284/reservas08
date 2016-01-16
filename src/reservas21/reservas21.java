@@ -54,6 +54,8 @@ public class reservas21 {
             return;
         }
         
+        
+        
         scanner.skip( "\\s*" );
         
         
@@ -129,16 +131,21 @@ public class reservas21 {
 //        }
 
         //output
-        System.out.println("** inicio do output **");
-        System.out.println("reservaCondicao.lenght:" + reservaCondicao.length);
-        System.out.println("num_reservas:" + num_reservas);
+//        System.out.println("** inicio do output **");
+//        System.out.println("reservaCondicao.lenght:" + reservaCondicao.length);
+//        System.out.println("num_reservas:" + num_reservas);
 
-        System.out.println("*** info sobre clientes ***");
-        System.out.println("num_clientes: " + num_clientes);
+        
+         /*********************************
+         * clientes
+         **********************************/
+//        System.out.println("*** info sobre clientes ***");
+//        System.out.println("num_clientes1: " + num_clientes);
+        
         // construir lista de clientes
         for (i = 0; i < num_reservas; i++) {                //passa por todas as reservas
             for (j = 0; j < num_clientes; j++) {            //percorrer ate acabarem os clientes diferentes
-                if (reservaNomeCliente[i].equals(clientesNome[j]))  // se o cliente ja estava na lista, break.
+                if (reservaNomeCliente[i].equals(clientesNome[j]))  // se o cliente ja estava na lista, break. nota2: equals porque é comparação de array.
                     break;
             }
             if (j==num_clientes){                           //aumenta um nr em num_clientes
@@ -146,11 +153,11 @@ public class reservas21 {
                 num_clientes++;
             }
         }
-    //        //mostra os clientes do array clientes
-    //        System.out.println("num.clientes: " + num_clientes);
-    //        for (int m = 0; m < num_clientes; m++) {
-    //            System.out.println("clientes: " + clientesNome[m]);
-    //        }
+//            //mostra os clientes do array clientes
+//            System.out.println("num.clientes2: " + num_clientes);
+//            for (int m = 0; m < num_clientes; m++) {
+//                System.out.println("clientes: " + clientesNome[m]);
+//            }
 
 
         /************************************
@@ -159,9 +166,7 @@ public class reservas21 {
 
         for (int sala = 0; sala < num_salas ; sala++) {
                   
-            System.out.println("teste");
-            System.out.println("teste2");
-            System.out.println("3");
+         
         }
         
         
@@ -186,12 +191,10 @@ public class reservas21 {
                 totalAnulacoes++;
             }    
             //somar o valor das condicoes N = reservas multiplas.
-            if (reservaCondicao[k] >= '0' && reservaCondicao[k] <= '9') {
-                System.out.println(reservaCondicao[k]);
-
-            int reservaCondicaoInt = Integer.parseInt(String.valueOf(reservaCondicao[k]));   
-            //source: http://stackoverflow.com/questions/2683324/java-char-array-to-int
-            totalReservasN+=reservaCondicaoInt;
+            if (reservaCondicao[k] >= '0' && reservaCondicao[k] <= '9') {  //Isto e para um máximo de reserva de 10 lugares seguidos
+                int reservaCondicaoInt = Integer.parseInt(String.valueOf(reservaCondicao[k]));   //converte em int
+                //source: http://stackoverflow.com/questions/2683324/java-char-array-to-int
+                totalReservasN+=reservaCondicaoInt;
             }
       }
         System.out.println("total Reservas:" + totalReservas);            
