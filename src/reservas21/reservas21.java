@@ -8,28 +8,33 @@ public class reservas21 {
     public static void main(String[] args) {
 
         //arrays de salas.txt
-        int[]     salaIdSala = new int[100];                 //coluna1
-        String[]  salaNomeSala = new String[100];            //coluna2
-        int[]     salaFilas = new int[100];                  //coluna3
-        int[]     salaLugares = new int[100];                //coluna4
-        String[]  salaNomeEspetaculo = new String[100];      //coluna5
-        int[]     salaPrecoBilhete = new int[100];           //coluna6
+        int[]       salaIdSala = new int[100];                 //coluna1
+        String[]    salaNomeSala = new String[100];            //coluna2
+        int[]       salaFilas = new int[100];                  //coluna3
+        int[]       salaLugares = new int[100];                //coluna4
+        String[]    salaNomeEspetaculo = new String[100];      //coluna5
+        int[]       salaPrecoBilhete = new int[100];           //coluna6
         //novos arrays
-        int[]     salaTotalLugares = new int[100];                 //coluna1
+        int[]       salaTotalLugares = new int[100];        
         
         //arrays de reservas.txt
-        int[]     reservaIdSala = new int[100];              //coluna1
-        String[]  reservaNomeEspetaculo = new String[100];   //coluna2
-        char[]    reservaCondicao = new char[100];           //coluna3
-        int[]     reservaFila = new int[100];                //coluna4
-        int[]     reservaLugar = new int[100];               //coluna5
-        int[]     reservaDia = new int[100];                 //coluna6
-        int[]     reservaMes = new int[100];                 //coluna7
-        char[]    reservaSessao = new char[100];             //coluna8
+        int[]       reservaIdSala = new int[100];              //coluna1
+        String[]    reservaNomeEspetaculo = new String[100];   //coluna2
+        char[]      reservaCondicao = new char[100];           //coluna3
+        int[]       reservaFila = new int[100];                //coluna4
+        int[]       reservaLugar = new int[100];               //coluna5
+        int[]       reservaDia = new int[100];                 //coluna6
+        int[]       reservaMes = new int[100];                 //coluna7
+        char[]      reservaSessao = new char[100];             //coluna8
 
+        //arrays de clientes
+        String[]    clientes = new String[100];   //clientes. precisamos para mostrar DE QUEM sao as reservas.
+        String[]    clientesLugares = new String[100]; // contem os lugares reservados dos clientes acima.
+        
         //declara variaveis
         int num_salas = 0;
         int num_reservas = 0;
+        int num_clientes = 0;
         int i, j;
         String output= "";
 
@@ -70,15 +75,14 @@ public class reservas21 {
         
         // salas.txt : output para ecra
         System.out.println("*** salas ***");
-        System.out.println("\tC1:idSala \tC2:nomeSala \tC3:fila \tC4:lugares \tC5:nomeEspetaculo \tC6:precoBilhete");
         
         for( i = 0;  i < num_salas;  i++ ){
             System.out.print  ( "L" + i + ":\t") ;
-            System.out.print  ( "C1:" + salaIdSala[i]  +        "\t\t");
+            System.out.print  ( "C1:" + salaIdSala[i]  +        "\t");
             System.out.print  ( "C2:" + salaNomeSala[i] +      "\t");
-            System.out.print  ( "C3:" + salaFilas[i] +         "\t\t");
-            System.out.print  ( "C4:" + salaLugares[i] +       "\t\t");
-            System.out.print  ( "C5:" + salaNomeEspetaculo[i] + "\t\t");
+            System.out.print  ( "C3:" + salaFilas[i] +         "\t");
+            System.out.print  ( "C4:" + salaLugares[i] +       "\t");
+            System.out.print  ( "C5:" + salaNomeEspetaculo[i] + "\t");
             System.out.println( "C6:" + salaPrecoBilhete[i]  +  "\t");
         }
 
@@ -118,7 +122,6 @@ public class reservas21 {
 
 
         // reservas.txt : output para ecra
-        //for( j = 0;  j < num_reservas;  j++ ){
         for( i = 0;  i < num_reservas ;  i++ ){
             System.out.print  ( "L" + i + ":\t") ;
             System.out.print  ( "C1:" + reservaIdSala[i]          + "\t");
@@ -130,22 +133,28 @@ public class reservas21 {
             System.out.print  ( "C7:" + reservaMes[i]             + "\t");
             System.out.println( "C8:" + reservaSessao[i]          + "\t");
         }
+
+        //output
+        System.out.println("** inicio **");
+        System.out.println("reservaCondicao.lenght:" + reservaCondicao.length);
+        System.out.println("num_reservas:" + num_reservas);
+
+
+        // construir lista de clientes
+     
         
-        //output.txt
+        
+        
+        
 
-System.out.println("** inicio **");
-System.out.println("reservaCondicao.lenght:" + reservaCondicao.length);
-System.out.println("num_reservas:" + num_reservas);
-
-
-
-
-// total de lugares livres
-int totalReservas = 0;
-int totalCompras = 0;        
-int totalAnulacoes = 0;    
-int totalReservasN = 0; 
-    for (int k = 0; k < num_reservas; k++) {
+        // total de lugares livres  
+        // oO!!! opsss! isto é para TODAS as salas....! 
+        // nao está a mostrar para cada sala individual.
+        int totalReservas = 0;
+        int totalCompras = 0;        
+        int totalAnulacoes = 0;    
+        int totalReservasN = 0; 
+        for (int k = 0; k < num_reservas; k++) {
             if (reservaCondicao[k] == 'R') {
                 totalReservas++;
             }
@@ -155,39 +164,26 @@ int totalReservasN = 0;
             if (reservaCondicao[k] == 'A') {
                 totalAnulacoes++;
             }    
-            //aqui, construir uma maneira de somar o valor dos Ns = reservas multiplas.
+            //somar o valor das condicoes N = reservas multiplas.
             if (reservaCondicao[k] >= '0' && reservaCondicao[k] <= '9') {
                 System.out.println(reservaCondicao[k]);
-    
+
             int reservaCondicaoInt = Integer.parseInt(String.valueOf(reservaCondicao[k]));   
             //source: http://stackoverflow.com/questions/2683324/java-char-array-to-int
             totalReservasN+=reservaCondicaoInt;
             }
-     
-    
-    
-    }
+      }
         System.out.println("total Reservas:" + totalReservas);            
         System.out.println("Total Compras:" + totalCompras);   
         System.out.println("Total Anulacoes:" + totalAnulacoes);   
         System.out.println("Total ReservasN:" + totalReservasN);   
 
-
-        
-
-
-
-
-//lugares livres
-//total lugares livres = (salaTotalLugares - salaReservas - salaCompras) + salaAnulacoes     
-
-
-//total de lugares nas salas
-        for (int k = 0; k < num_salas; k++) {
-            //System.out.println("nome da sala:" + salaNomeSala[k]);
-            salaTotalLugares[k] = salaFilas[k] * salaLugares[k] ;
-            System.out.println(salaNomeSala[k] +  " filas:" + salaFilas[k] + " lug:" + salaLugares[k] + " total lug:" + salaTotalLugares[k] ) ;
-        }
+    //total lugares livres = (salaTotalLugares - salaReservas - salaCompras) + salaAnulacoes     
+    //total de lugares nas salas
+    for (int k = 0; k < num_salas; k++) {
+        salaTotalLugares[k] = salaFilas[k] * salaLugares[k] ;
+        System.out.println(salaNomeSala[k] +  "\tfilas:" + salaFilas[k] + "\t lug:" + salaLugares[k] + " \t total lug:" + salaTotalLugares[k] ) ;
+    }
 
 
 
