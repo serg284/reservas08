@@ -39,11 +39,9 @@ public class reservas21 {
         String output= "";
 
         
-        /**
-         *********************************************
-         ************ salas.txt **********************
-         *********************************************
-         */
+        /*********************************************
+         * salas.txt
+         *********************************************/
 
         // salas.txt : le dados do ficheiro
         Scanner scanner;
@@ -68,7 +66,7 @@ public class reservas21 {
             salaNomeEspetaculo[i] = scanner.next();         //coluna5
             salaPrecoBilhete[i]   = scanner.nextInt();      //coluna6
 
-            scanner.skip( "\\s*" );
+            scanner.skip( "\\s*" );                         // em principio, esta linha nao faz nada, porque já está coberto no delimiter, mas o prof disse que podia ficar.
             num_salas++;
         }
         
@@ -85,11 +83,9 @@ public class reservas21 {
 //            System.out.println( "C6:" + salaPrecoBilhete[m]  +  "\t");
 //        }
 
-         /**
-         *********************************************
-         ************ reservas.txt *******************
-         *********************************************
-         */
+         /*********************************
+         * reservas.txt 
+         **********************************/
 
         // reservas.txt : le dados do ficheiro
         Scanner scannerReservas;
@@ -114,7 +110,7 @@ public class reservas21 {
             reservaMes[j]   = scannerReservas.nextInt();            //coluna7
             reservaSessao[j] = scannerReservas.next().charAt(0);    //coluna8
  
-            scannerReservas.skip( "\\s*" );
+            scannerReservas.skip( "\\s*" );                         // em principio, esta linha nao faz nada, porque já está coberto no delimiter, mas o prof disse que podia ficar.
             num_reservas++;
         }
 
@@ -157,11 +153,19 @@ public class reservas21 {
     //        }
 
 
-        
-        
-        
-        
+        /************************************
+         * criacao de mapa de reservas
+         ************************************/
 
+        for (int sala = 0; sala < num_salas ; sala++) {
+                  
+            
+        }
+        
+        
+        
+        
+        
         // total de lugares livres  
         // oO!!! opsss! isto é para TODAS as salas....! 
         // nao está a mostrar para cada sala individual.
