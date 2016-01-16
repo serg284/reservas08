@@ -28,7 +28,7 @@ public class reservas21 {
         char[]      reservaSessao = new char[100];          //coluna8
 
         //arrays de clientes
-        String[]    clientes = new String[100];   //clientes. precisamos para mostrar DE QUEM sao as reservas.
+        String[]    clientesNome = new String[100];   //clientes. precisamos para mostrar DE QUEM sao as reservas.
         String[]    clientesLugares = new String[100]; // contem os lugares reservados dos clientes acima.
         
         //declara variaveis
@@ -73,18 +73,17 @@ public class reservas21 {
         }
         
         
-        // salas.txt : output para ecra
-        System.out.println("*** salas ***");
-        
-        for( i = 0;  i < num_salas;  i++ ){
-            System.out.print  ( "L" + i + ":\t") ;
-            System.out.print  ( "C1:" + salaIdSala[i]  +        "\t");
-            System.out.print  ( "C2:" + salaNomeSala[i] +      "\t");
-            System.out.print  ( "C3:" + salaFilas[i] +         "\t");
-            System.out.print  ( "C4:" + salaLugares[i] +       "\t");
-            System.out.print  ( "C5:" + salaNomeEspetaculo[i] + "\t");
-            System.out.println( "C6:" + salaPrecoBilhete[i]  +  "\t");
-        }
+//        // salas.txt : output para ecra
+//        System.out.println("*** salas ***");
+//        for( m = 0;  m < num_salas;  m++ ){
+//            System.out.print  ( "L" + m + ":\t") ;
+//            System.out.print  ( "C1:" + salaIdSala[m]  +        "\t");
+//            System.out.print  ( "C2:" + salaNomeSala[m] +      "\t");
+//            System.out.print  ( "C3:" + salaFilas[m] +         "\t");
+//            System.out.print  ( "C4:" + salaLugares[m] +       "\t");
+//            System.out.print  ( "C5:" + salaNomeEspetaculo[m] + "\t");
+//            System.out.println( "C6:" + salaPrecoBilhete[m]  +  "\t");
+//        }
 
          /**
          *********************************************
@@ -105,7 +104,6 @@ public class reservas21 {
         scannerReservas.skip( "\\s*" );
 
         // reservas.txt: separa o conteudo da variavel scanner em arrays diferentes.
-        System.out.println("*** reservas ***");
         for( j = 0;  scannerReservas.hasNextLine();  j++ ){
             reservaIdSala[j] = scannerReservas.nextInt();           //coluna1
             reservaNomeCliente[j] = scannerReservas.next();         //coluna2
@@ -121,27 +119,44 @@ public class reservas21 {
         }
 
 
-        // reservas.txt : output para ecra
-        for( i = 0;  i < num_reservas ;  i++ ){
-            System.out.print  ( "L" + i + ":\t") ;
-            System.out.print  ( "C1:" + reservaIdSala[i]            + "\t");
-            System.out.print  ( "C2:" + reservaNomeCliente[i]       + "\t");
-            System.out.print  ( "C3:" + reservaCondicao[i]          + "\t");
-            System.out.print  ( "C4:" + reservaFila[i]              + "\t");
-            System.out.print  ( "C5:" + reservaLugar[i]             + "\t");
-            System.out.print  ( "C6:" + reservaDia[i]               + "\t");
-            System.out.print  ( "C7:" + reservaMes[i]               + "\t");
-            System.out.println( "C8:" + reservaSessao[i]            + "\t");
-        }
+//        // reservas.txt : output para ecra
+//        for( m = 0;  m < num_reservas ;  m++ ){
+//            System.out.print  ( "L" + m + ":\t") ;
+//            System.out.print  ( "C1:" + reservaIdSala[m]            + "\t");
+//            System.out.print  ( "C2:" + reservaNomeCliente[m]       + "\t");
+//            System.out.print  ( "C3:" + reservaCondicao[m]          + "\t");
+//            System.out.print  ( "C4:" + reservaFila[m]              + "\t");
+//            System.out.print  ( "C5:" + reservaLugar[m]             + "\t");
+//            System.out.print  ( "C6:" + reservaDia[m]               + "\t");
+//            System.out.print  ( "C7:" + reservaMes[m]               + "\t");
+//            System.out.println( "C8:" + reservaSessao[m]            + "\t");
+//        }
 
         //output
-        System.out.println("** inicio **");
+        System.out.println("** inicio do output **");
         System.out.println("reservaCondicao.lenght:" + reservaCondicao.length);
         System.out.println("num_reservas:" + num_reservas);
 
-
+        System.out.println("*** info sobre clientes ***");
+        System.out.println("num_clientes: " + num_clientes);
         // construir lista de clientes
-     
+        for (i = 0; i < num_reservas; i++) {                //passa por todas as reservas
+            for (j = 0; j < num_clientes; j++) {            //percorrer ate acabarem os clientes diferentes
+                if (reservaNomeCliente[i].equals(clientesNome[j]))  // se o cliente ja estava na lista, break.
+                    break;
+            }
+            if (j==num_clientes){                           //aumenta um nr em num_clientes
+                clientesNome[num_clientes]=reservaNomeCliente[i];  //guarda o nome do cliente no array dos clientes
+                num_clientes++;
+            }
+        }
+    //        //mostra os clientes do array clientes
+    //        System.out.println("num.clientes: " + num_clientes);
+    //        for (int m = 0; m < num_clientes; m++) {
+    //            System.out.println("clientes: " + clientesNome[m]);
+    //        }
+
+
         
         
         
