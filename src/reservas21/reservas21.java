@@ -140,10 +140,11 @@ System.out.println("num_reservas:" + num_reservas);
 
 
 
-// total de reservas
+// total de lugares livres
 int totalReservas = 0;
 int totalCompras = 0;        
 int totalAnulacoes = 0;    
+int totalReservasN = 0; 
     for (int k = 0; k < num_reservas; k++) {
             if (reservaCondicao[k] == 'R') {
                 totalReservas++;
@@ -152,17 +153,18 @@ int totalAnulacoes = 0;
                 totalCompras++;
             }
             if (reservaCondicao[k] == 'A') {
-                //System.out.println(reservaCondicao[k]);
                 totalAnulacoes++;
             }    
-        }
+            //aqui, construir uma maneira de somar o valor dos Ns = reservas multiplas.
+            if (reservaCondicao[k] == 'A') {
+                totalReservasN++;
+            }    
+    }
         System.out.println("total Reservas:" + totalReservas);            
         System.out.println("Total Compras:" + totalCompras);   
         System.out.println("Total Anulacoes:" + totalAnulacoes);   
+        System.out.println("Total ReservasN:" + totalReservasN);   
 
-
-
-//n
 
 
 
