@@ -164,8 +164,16 @@ public class reservas21 {
          ************************************/
 
         for (int sala = 0; sala < num_salas ; sala++) {
-                  
-         
+            for (int mes = 0; mes <=12; mes++) {
+                
+                
+            
+            
+                for (int sessao = 0; sessao < 3; sessao++) {  // sessao < 3. manha, tarde e noite.
+
+
+                }
+            }
         }
         
         
