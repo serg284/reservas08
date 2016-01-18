@@ -35,7 +35,7 @@ public class reservas21 {
         int num_salas = 0;
         int num_reservas = 0;
         int num_clientes = 0;
-        int i, j;
+        int i, j, m; 
         String output= "";
 
         
@@ -140,7 +140,6 @@ public class reservas21 {
          * clientes
          **********************************/
 //        System.out.println("*** info sobre clientes ***");
-//        System.out.println("num_clientes1: " + num_clientes);
         
         // construir lista de clientes
         for (i = 0; i < num_reservas; i++) {                //passa por todas as reservas
@@ -154,8 +153,8 @@ public class reservas21 {
             }
         }
 //            //mostra os clientes do array clientes
-//            System.out.println("num.clientes2: " + num_clientes);
-//            for (int m = 0; m < num_clientes; m++) {
+//            System.out.println("num.clientes: " + num_clientes);
+//            for ( m = 0; m < num_clientes; m++) {
 //                System.out.println("clientes: " + clientesNome[m]);
 //            }
 
