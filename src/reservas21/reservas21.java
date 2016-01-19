@@ -5,6 +5,18 @@ import java.util.Scanner;
 
 
 public class reservas21 {
+  
+    
+    private static int sessaoNumero(char sessaoChar) {
+        switch (sessaoChar){
+        case 'M': return 0;  //ATENCAO!! faltam os breaks!!
+        case 'T': return 1;
+        case 'N': return 2;
+        }
+        return -1; //erro
+    }
+    
+    
     public static void main(String[] args) {
 
         //arrays de salas.txt
@@ -111,7 +123,6 @@ public class reservas21 {
             reservaDia[j]    = scannerReservas.nextInt();           //coluna6
             reservaMes[j]   = scannerReservas.nextInt();            //coluna7
             reservaSessao[j] = scannerReservas.next().charAt(0);    //coluna8
- 
             scannerReservas.skip( "\\s*" );                         // em principio, esta linha nao faz nada, porque já está coberto no delimiter, mas o prof disse que podia ficar.
             num_reservas++;
         }
@@ -130,7 +141,7 @@ public class reservas21 {
 //            System.out.println( "C8:" + reservaSessao[m]            + "\t");
 //        }
 
-        //output
+//        //output
 //        System.out.println("** inicio do output **");
 //        System.out.println("reservaCondicao.lenght:" + reservaCondicao.length);
 //        System.out.println("num_reservas:" + num_reservas);
@@ -163,15 +174,30 @@ public class reservas21 {
          * criacao de mapa de reservas
          ************************************/
 
+        
+        int[] mapa = new int[100][100];
+        int max_fila;
+        int max_lugar;
+        
+                        
         for (int sala = 0; sala < num_salas ; sala++) {
-            for (int mes = 0; mes <=12; mes++) {
-                
-                
-            
-            
-                for (int sessao = 0; sessao < 3; sessao++) {  // sessao < 3. manha, tarde e noite.
-
-
+            for (int mes = 1; mes <=12; mes++) {
+                for (int dia = 1; dia <=31; dia++) {
+                    for (int sessao = 0; sessao < 3; sessao++) {  // sessao < 3. manha, tarde e noite.
+                        //inicializar mapa a zeros (lugares vazios)
+                        for (int x = 0; x < 100; x++) {    //ATENCAO!!! 100, tem de ser com lenght
+                            for (int y=0; y <100 ; y++){
+                                mapa[x][y] = 0; //ATENCAO!! falta criar array
+                            }
+                            for (int r = 0; r < num_reservas; r++) {
+                                if (reservaIdSala[r]==sala && 
+                                    reservaMes[r]==mes &&    
+                                    reservaDia[r]==dia &&
+                                    sessaoNumero(reservaSessao[r]==sessao)    ) 
+                                {
+                            }
+                        }
+                    }
                 }
             }
         }
