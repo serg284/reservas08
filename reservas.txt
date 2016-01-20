@@ -7,9 +7,4 @@
 2 : Guilherme : R : 2 : 6 : 5 : 1 : N
 1 : Antonio : A : 1 : 1 : 5 : 1 : N
 3 : Antonio : A : 1 : 1 : 5 : 1 : N
-4 : Antonio : A : 1 : 1 : 5 : 1 : N
-5 : Antonio : R : 1 : 1 : 5 : 1 : N
-5 : Antonio : C : 1 : 1 : 5 : 6 : N
-5 : Antonio : 4 : 1 : 1 : 5 : 6 : T
-5 : Antonio : 5 : 1 : 2 : 5 : 6 : T
-5 : Antonio : 9 : 1 : 2 : 5 : 6 : T
+1 : Daniel : R : 1 : 5 : 6 : 1 : N
