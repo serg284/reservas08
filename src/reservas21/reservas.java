@@ -267,6 +267,8 @@ public class reservas {
 		int fila, max_filas;
 		int lugar, max_lugares;
 		
+                //codigo de totalreceitas
+                int totalReceitaVendidos = 0; 
 		int idCliente;
 		
 		boolean reservaEncontrada=false;
@@ -359,8 +361,14 @@ public class reservas {
 							
 							//<Receita> | <Estimativa>
 							int receitaVendidos = countEstado[2]*salaPrecoBilhete[sala];
-							int receitaReservados = countEstado[1]*salaPrecoBilhete[sala];
-							
+							int receitaReservados = countEstado[1]*salaPrecoBilhete[sala] ;
+
+                                                       //*** inicio do codigo de total de receitas *** 
+                                                       
+                                                       totalReceitaVendidos += receitaVendidos; 
+                                                       
+                                                       
+                                                       
 							output += receitaVendidos + " | " + (receitaVendidos+receitaReservados);
 							
 							//<Linha em branco>
@@ -378,9 +386,10 @@ public class reservas {
 							//output_total += ...
 							
 							escreveOutput(output_total);
-							
+                                                        //codigo totalreservas. a decorrer
+							System.out.println("totalReceitaVendidos: " + totalReceitaVendidos);
 							System.out.println("Terminado. Processadas " + num_reservas + " reservas.");
-							System.exit(0);
+                                                        System.exit(0);
 						}
 					}
 				}
