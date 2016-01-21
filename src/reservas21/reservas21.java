@@ -175,8 +175,7 @@ for( j = 0;  scannerReservas.hasNextLine();  j++ ){
 }
 
 
-// reservas.txt : output para ecra
-//for( j = 0;  j < num_reservas;  j++ ){
+// ******* mostra o conteudo de reservas.txt no ecra *********
 //for( i = 0;  i < num_reservas ;  i++ ){
 //    System.out.print  ( "L" + i + ":\t") ;
 //    System.out.print  ( "C1:" + reservaIdSala[i]          + "\t");
@@ -191,8 +190,7 @@ for( j = 0;  scannerReservas.hasNextLine();  j++ ){
 
 
 
-
-////mostra total de clientes
+// ****** mostra total de clientes no ecra ***********
 //for (i=0; i<num_reservas; i++) {
 //	
 //	for (j=0; j<num_clientes; j++) {
@@ -206,13 +204,11 @@ for( j = 0;  scannerReservas.hasNextLine();  j++ ){
 //	}
 //}
 //System.out.println("Encontrados " + num_clientes + " clientes.");
-
-
-//for (i=0; i<num_clientes; i++)
+// for (i=0; i<num_clientes; i++)
 //	System.out.println(clientesNome[i]);
 
 /****************************
- * Criamos mapa de reservas
+ * Criação de mapa de reservas
  ***************************/
 
 int[][] mapa = new int[100][100];
