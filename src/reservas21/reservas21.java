@@ -97,7 +97,7 @@ public class reservas21 {
 
 		int i, j;
 		String output= "";
-                
+
 /*********************************************
  ************ salas.txt **********************
  *********************************************/
@@ -128,7 +128,7 @@ for( i = 0;  scanner.hasNextLine();  i++ ){
 }
 
 
-// salas.txt : output para ecra
+// *************** mostra salas.txt no ecra **************************
 //System.out.println("*** salas ***");
 //System.out.println("\tC1:idSala \tC2:nomeSala \tC3:fila \tC4:lugares \tC5:nomeEspetaculo \tC6:precoBilhete");
 //for( i = 0;  i < num_salas;  i++ ){
@@ -175,7 +175,7 @@ for( j = 0;  scannerReservas.hasNextLine();  j++ ){
 }
 
 
-// ******* mostra o conteudo de reservas.txt no ecra *********
+// ******* mostra o conteudo de reservas.txt no ecra ************
 //for( i = 0;  i < num_reservas ;  i++ ){
 //    System.out.print  ( "L" + i + ":\t") ;
 //    System.out.print  ( "C1:" + reservaIdSala[i]          + "\t");
@@ -207,10 +207,8 @@ for( j = 0;  scannerReservas.hasNextLine();  j++ ){
 // for (i=0; i<num_clientes; i++)
 //	System.out.println(clientesNome[i]);
 
-/****************************
- * Criação de mapa de reservas
- ***************************/
 
+//****** criação de mapa de reservas **********************
 int[][] mapa = new int[100][100];
 int fila, max_filas;
 int lugar, max_lugares;
@@ -264,7 +262,8 @@ for (int sala=1; sala<=num_salas; sala++) {
 					}
 				}
 				if (reservaEncontrada) {
-					System.out.println(imprimirMapa(mapa, max_filas, max_lugares));
+                                        System.out.println("nome da sala");
+                                        System.out.println(imprimirMapa(mapa, max_filas, max_lugares));
                                         String temp = imprimirMapa(mapa, max_filas, max_lugares);
                                        // System.out.println(temp + "after removing" + removeLastChar(temp)  );
 				}
