@@ -83,7 +83,6 @@ public class reservas {
 	
 	//Devolve uma String com a representacao do mapa de uma sala
 	private static String imprimirMapa(int[][] mapa, int f_max, int l_max) {
-		
 		String mapaString="";
 		int comprimento;
 		
@@ -91,15 +90,15 @@ public class reservas {
 			
 			for (int l=0; l<l_max; l++) {
 				if (mapa[f][l]==0)
-					mapaString+="L|";
+					mapaString+="L | ";
 				else if (mapa[f][l]>0)
-					mapaString+=("C|");
+					mapaString+=("C | ");
 				else
-					mapaString+=("R|");
+					mapaString+=("R | ");
 			}
 			//removemos | ao final da linha
 			comprimento=mapaString.length();
-			mapaString=mapaString.substring(0,comprimento-1);
+			mapaString=mapaString.substring(0,comprimento-2);
 			
 			//nova linha para nova fila
 			mapaString+="\n";
