@@ -46,9 +46,11 @@ public class reservas {
 	//Converte um char array em int, vamos usar nas reservas multiplas, em digito
         //source: http://stackoverflow.com/questions/2683324/java-char-array-to-int
 	private static int charParaInt(char numeroChar) {
-		return (int) numeroChar-'0';
-	}
-	
+		return (int)  Integer.parseInt(String.valueOf(numeroChar));
+                //outro metodo, usando substituição de unicode: return (int) numeroChar-'0';
+        }
+
+        
 	//Dado um codigo de sessao em char devolve o equivalente numerico
 	private static int sessaoNumero(char sessaoChar) {
 		switch (sessaoChar) {
@@ -85,9 +87,7 @@ public class reservas {
 	private static String imprimirMapa(int[][] mapa, int f_max, int l_max) {
 		String mapaString="";
 		int comprimento;
-		
 		for (int f=0; f<f_max; f++) {
-			
 			for (int l=0; l<l_max; l++) {
 				if (mapa[f][l]==0)
 					mapaString+="L | ";
