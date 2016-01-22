@@ -269,6 +269,11 @@ public class reservas {
 		
                 //codigo de totalreceitas
                 int totalReceitaVendidos = 0; 
+                
+                // codigo de totalreceitas estimado
+                int totalReceitaEstimado = 0;
+                
+                
 		int idCliente;
 		
 		boolean reservaEncontrada=false;
@@ -368,6 +373,9 @@ public class reservas {
                                                        totalReceitaVendidos += receitaVendidos; 
                                                        
                                                        
+                                                       ////*** inicio do codigo de total de receitas *** 
+                                                       
+                                                       totalReceitaEstimado += (receitaVendidos + receitaReservados);
                                                        
 							output += receitaVendidos + " | " + (receitaVendidos+receitaReservados);
 							
@@ -386,9 +394,12 @@ public class reservas {
 							//output_total += ...
 							
 							escreveOutput(output_total);
-                                                        //codigo totalreservas. a decorrer
-							System.out.println("totalReceitaVendidos: " + totalReceitaVendidos);
-							System.out.println("Terminado. Processadas " + num_reservas + " reservas.");
+                                                        //codigo de todas as sessões:calcula o total de receitascompradas | receitas compradas + reservadas 
+							System.out.println(totalReceitaVendidos +" | " +  totalReceitaEstimado );
+							
+                                                        
+                                                       // System.out.println("Terminado. Processadas " + num_reservas + " reservas.");
+                                                        
                                                         System.exit(0);
 						}
 					}
