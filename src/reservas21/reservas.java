@@ -215,11 +215,7 @@ public class reservas {
 //		    System.out.println( "C8:" + reservaSessao[i]          + "\t");
 //		}
 		
-		System.out.println("Leitura do ficheiro de reservas OK.");
-		
-		/****************************
-		 * Output file
-		 ***************************/
+		//*********************** Output ****************************
 		
 		//Criando lista de clientes
 		for (i=0; i<num_reservas; i++) {
@@ -228,9 +224,8 @@ public class reservas {
 				num_clientes++;
 			}
 		}
-		
-		System.out.println("Encontrados " + num_clientes + " clientes.");
-		//***** mostra lista de clientes no ecra *****
+
+                //***** mostra lista de clientes no ecra *****
 //		System.out.println("*** lista de clientes ***");
 //                for (i=0; i<num_clientes; i++)
 //			System.out.println(clientesNome[i]);
@@ -332,10 +327,10 @@ public class reservas {
 							int receitaVendidos = countEstado[2]*salaPrecoBilhete[sala];
 							int receitaReservados = countEstado[1]*salaPrecoBilhete[sala] ;
 
-                                                       //*** inicio do codigo de total de receitas *** 
-                                                       totalReceitaVendidos += receitaVendidos; 
-                                                       totalReceitaEstimado += (receitaVendidos + receitaReservados);
-                                                       
+                                                        //*** inicio do codigo de total de receitas *** 
+                                                        totalReceitaVendidos += receitaVendidos; 
+                                                        totalReceitaEstimado += (receitaVendidos + receitaReservados);
+                                                        
 							output += receitaVendidos + " | " + (receitaVendidos+receitaReservados);
 							
 							//<Linha em branco>
@@ -354,7 +349,6 @@ public class reservas {
                                                         //codigo de todas as sessões:calcula o total de receitascompradas | receitas compradas + reservadas 
 							System.out.println(totalReceitaVendidos +" | " +  totalReceitaEstimado );
 							
-                                                       // System.out.println("Terminado. Processadas " + num_reservas + " reservas.");
                                                         System.exit(0);
 						}
 					}
