@@ -50,15 +50,15 @@ public class reservas {
                 //outro metodo, usando substituição de unicode: return (int) numeroChar-'0';
         }
 
-        
 	//Dado um codigo de sessao em char devolve o equivalente numerico
+        //nota: http://stackoverflow.com/questions/18192255/regarding-java-switch-statements-using-return-and-omitting-breaks-in-each-case
 	private static int sessaoNumero(char sessaoChar) {
 		switch (sessaoChar) {
 		case 'M': return 0;
 		case 'T': return 1;
 		case 'N': return 2;
 		}
-		return -1; //Erro
+		return -1; //Erro. tipo de sessão não esperada.
 	}
 	
 	//Dado um codigo de sessao em int devolve o equivalente em char
@@ -73,16 +73,16 @@ public class reservas {
 	
 	//Dado um nome de cliente devolve o seu id
 	//o id E o indice no array de clientes + 1
-	//Nao podemos devolver o indice porque pode ser 0 e 0 vai ser utilizado para representar lugar livre
+	//Nao podemos devolver o indice porque pode ser 0 . 0 vai ser utilizado para representar lugar livre
+        //source: http://stackoverflow.com/questions/513832/how-do-i-compare-strings-in-java
 	private static int procuraCliente(String nomeCliente) {
 		for (int c=0; c<num_clientes; c++) {
-			if (clientesNome[c].equals(nomeCliente))
+			if (clientesNome[c].equals(nomeCliente))  // em string, uma comparação é com equals, à semelhança de == em int
 				return c+1;
 		}
-		
 		return -1; //Erro. Cliente nao encontrado
 	}
-	
+        
 	//Devolve uma String com a representacao do mapa de uma sala
 	private static String imprimirMapa(int[][] mapa, int f_max, int l_max) {
 		String mapaString="";
@@ -99,43 +99,37 @@ public class reservas {
 			//removemos | ao final da linha
 			comprimento=mapaString.length();
 			mapaString=mapaString.substring(0,comprimento-2);
-			
 			//nova linha para nova fila
 			mapaString+="\n";
 		}
 		return mapaString;
 	}
 	
-	//Funcao que dado um mapa conta o numero de lugares vagos, numero de reservas, e numero de compras
+	//Funcao que dado um mapa conta o numero de lugares livres, numero de reservas, e numero de compras
 	private static int[] contarEstados(int[][] mapa, int max_filas, int max_lugares) {
-
-		int[] count = {0,0,0};
+		int[] count = {0,0,0};   // (livres, reservados, comprados)
 		//indice 0 para livre (valor 0 no mapa)
 		//indice 1 para reservado (valor negativo no mapa)
 		//indice 2 para comprado (valor positivo no mapa)
 		
 		for (int f=0; f<max_filas; f++)
 			for (int l=0; l<max_lugares; l++)
-				if (mapa[f][l]==0)
+				if (mapa[f][l]==0)              // lugares livres. igual a zero.
 					count[0]=count[0]+1;
-				
-				else if (mapa[f][l]<0)
+				else if (mapa[f][l]<0)          // lugares reservados. menor que zero.
 					count[1]=count[1]+1;
-				else
+				else                            // lugares comprados . maior que zero.
 					count[2]=count[2]+1;
 		return count;
 	}
 	
 	//Funcao que dado um mapa e um cliente determina as reservas do cliente
 	private static String procuraReservas(int[][] mapa, int max_filas, int max_lugares, int cliente) {
-		
 		String reservas="";
-		
 		for (int f=0; f<max_filas; f++)
 			for (int l=0; l<max_lugares; l++)
 				if (mapa[f][l]==-cliente)
 					reservas += " | " + (f+1) + " | " + (l+1); 
-		
 		return reservas;
 	}
 	
@@ -346,7 +340,7 @@ public class reservas {
 							//Mapa da sala
 							output += imprimirMapa(mapa, max_filas, max_lugares);
 							
-							//Determinamos a contagem dos estados (livra, reservado, comprado)
+							//Determinamos a contagem dos estados (livre, reservado, comprado)
 							countEstado = contarEstados(mapa, max_filas, max_lugares);
 							
 							//Contagem de lugares vagos
@@ -368,12 +362,7 @@ public class reservas {
 							int receitaReservados = countEstado[1]*salaPrecoBilhete[sala] ;
 
                                                        //*** inicio do codigo de total de receitas *** 
-                                                       
                                                        totalReceitaVendidos += receitaVendidos; 
-                                                       
-                                                       
-                                                       ////*** inicio do codigo de total de receitas *** 
-                                                       
                                                        totalReceitaEstimado += (receitaVendidos + receitaReservados);
                                                        
 							output += receitaVendidos + " | " + (receitaVendidos+receitaReservados);
