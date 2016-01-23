@@ -23,7 +23,7 @@ public class reservas {
 
 	//arrays de reservas.txt
 	private static int[]     reservaIdSala = new int[100];              //coluna1
-	private static String[]  reservaNomeCliente = new String[100];   	//coluna2
+	private static String[]  reservaNomeCliente = new String[100];      //coluna2
 	private static char[]    reservaCondicao = new char[100];           //coluna3
 	private static int[]     reservaFila = new int[100];                //coluna4
 	private static int[]     reservaLugar = new int[100];               //coluna5
@@ -177,7 +177,6 @@ public class reservas {
 		    scanner.skip( "\\s*" );
 		    num_salas++;
 		}
-		
 		
 		// salas.txt : output para ecra
 		//System.out.println("*** salas ***");
