@@ -6,11 +6,8 @@ import java.util.Scanner;
 
 
 public class reservas {
-	
-	/***********************
-	 * Variaveis
-	 ***********************/
-	
+    
+	//************************ Variaveis ***********************
 	//arrays de salas.txt
 	private static int[]     salaIdSala = new int[100];                 //coluna1
 	private static String[]  salaNomeSala = new String[100];            //coluna2
@@ -39,10 +36,7 @@ public class reservas {
 	private static int num_reservas = 0;
 	private static int num_clientes =0;
 	
-	/***********************
-	 * Funcoes
-	 ***********************/
-	
+	//********************** Funcoes ***************************
 	//Converte um char array em int, vamos usar nas reservas multiplas, em digito
         //source: http://stackoverflow.com/questions/2683324/java-char-array-to-int
 	private static int charParaInt(char numeroChar) {
@@ -105,7 +99,7 @@ public class reservas {
 		return mapaString;
 	}
 	
-	//Funcao que dado um mapa conta o numero de lugares livres, numero de reservas, e numero de compras
+	//Funcao que conta o numero de lugares livres, reservas, e compras
 	private static int[] contarEstados(int[][] mapa, int max_filas, int max_lugares) {
 		int[] count = {0,0,0};   // (livres, reservados, comprados)
 		//indice 0 para livre (valor 0 no mapa)
@@ -135,18 +129,12 @@ public class reservas {
 	
 	//Funcao que recebe os calculos e os escreve num ficheiro
 	private static void escreveOutput(String output) {
-		
 	}
 	
 	public static void main(String[] args) {
 		int i, j;
 			
-		/**
-		 *********************************************
-		 ************ salas.txt **********************
-		 *********************************************
-		 */
-		
+		//******************** salas.txt ****************************************
 		// salas.txt : le dados do ficheiro
 		Scanner scanner;
 		try	{
@@ -172,7 +160,7 @@ public class reservas {
 		    num_salas++;
 		}
 		
-		// salas.txt : output para ecra
+		// salas.txt : output para ecra. comentado.
 		//System.out.println("*** salas ***");
 		//System.out.println("\tC1:idSala \tC2:nomeSala \tC3:fila \tC4:lugares \tC5:nomeEspetaculo \tC6:precoBilhete");
 		//for( i = 0;  i < num_salas;  i++ ){
@@ -184,15 +172,8 @@ public class reservas {
 		//    System.out.print  ( "C5:" + salaNomeEspetaculo[i] + "\t\t");
 		//    System.out.println( "C6:" + salaPrecoBilhete[i]  +  "\t");
 		//}
-		
-		System.out.println("Leitura do ficheiro de salas OK.");
-		
-		 /**
-		 *********************************************
-		 ************ reservas.txt *******************
-		 *********************************************
-		 */
-		
+
+		//********************* reservas.txt **************************************                
 		// reservas.txt : le dados do ficheiro
 		Scanner scannerReservas;
 		try {
@@ -209,7 +190,7 @@ public class reservas {
 		//System.out.println("*** reservas ***");
 		for( j = 0;  scannerReservas.hasNextLine();  j++ ){
 		    reservaIdSala[j] = scannerReservas.nextInt();           //coluna1
-		    reservaNomeCliente[j] = scannerReservas.next();      //coluna2
+		    reservaNomeCliente[j] = scannerReservas.next();         //coluna2
 		    reservaCondicao[j] = scannerReservas.next().charAt(0);  //coluna3
 		    reservaFila[j]  = scannerReservas.nextInt();            //coluna4
 		    reservaLugar[j]  = scannerReservas.nextInt();           //coluna5
@@ -220,7 +201,6 @@ public class reservas {
 		    scannerReservas.skip( "\\s*" );
 		    num_reservas++;
 		}
-		
 		
 		// reservas.txt : output para ecra
 //		for( i = 0;  i < num_reservas ;  i++ ){
@@ -250,11 +230,12 @@ public class reservas {
 		}
 		
 		System.out.println("Encontrados " + num_clientes + " clientes.");
-		
-		//for (i=0; i<num_clientes; i++)
-		//	System.out.println(clientesNome[i]);
-		
-		String output_total= "";
+		//***** mostra lista de clientes no ecra *****
+//		System.out.println("*** lista de clientes ***");
+//                for (i=0; i<num_clientes; i++)
+//			System.out.println(clientesNome[i]);
+
+                String output_total= "";    // inicializa variavel output_total
 		
 		int[][] mapa = new int[100][100];
 		int fila, max_filas;
@@ -266,21 +247,17 @@ public class reservas {
                 // codigo de totalreceitas estimado
                 int totalReceitaEstimado = 0;
                 
-                
 		int idCliente;
 		
 		boolean reservaEncontrada=false;
 		int reservasProcessadas=0;
 		
 		for (int sala=1; sala<=num_salas; sala++) {
-			
 			max_filas=salaFilas[sala];
 			max_lugares=salaLugares[sala];
-			
 			for (int mes=1; mes<=12; mes++) {
 				for (int dia=1; dia<=31; dia++) {
 					for (int sessao=0; sessao<3; sessao++) {
-						
 						//inicializar mapa a zeros (lugares vazios)
 						for (i=0; i<100; i++)
 							for (j=0; j<100; j++)
@@ -298,7 +275,6 @@ public class reservas {
 								idCliente=procuraCliente(reservaNomeCliente[r]);
 								fila=reservaFila[r]-1;
 								lugar=reservaLugar[r]-1;
-								
 								
 								switch (reservaCondicao[r]) {
 								case 'A':
@@ -319,14 +295,10 @@ public class reservas {
 						}
 						
 						if (reservaEncontrada) {
-							
 							//criamos e inizializamo o array que vai conter a contagem
 							//de lugares vagos (0) reservas (1) comprados (2)
 							int[] countEstado;
-							
 							String output="";
-							
-							System.out.println("Processando reservas...");
 							
 							//<Nome Espetactaculo> | <Nome Sala> | <Numero Filas> | <Numero Lugares>
 							output += salaNomeEspetaculo[sala] + " | ";
@@ -349,7 +321,6 @@ public class reservas {
 							//Detalhes dos lugares reservados
 							String clienteReservas;
 							for (int c=1; c<=num_clientes; c++) {
-								
 								clienteReservas=procuraReservas(mapa, max_filas, max_lugares, c);
 								
 								if (!clienteReservas.isEmpty()) {
@@ -375,9 +346,7 @@ public class reservas {
 						}
 						
 						reservaEncontrada=false;
-						
 						if (reservasProcessadas==num_reservas) {
-							
 							//<Receita Total> | <Estimativa Total>
 							//output_total += ...
 							
@@ -385,9 +354,7 @@ public class reservas {
                                                         //codigo de todas as sessões:calcula o total de receitascompradas | receitas compradas + reservadas 
 							System.out.println(totalReceitaVendidos +" | " +  totalReceitaEstimado );
 							
-                                                        
                                                        // System.out.println("Terminado. Processadas " + num_reservas + " reservas.");
-                                                        
                                                         System.exit(0);
 						}
 					}
