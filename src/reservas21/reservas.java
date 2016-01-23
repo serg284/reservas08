@@ -90,7 +90,7 @@ public class reservas {
 				else
 					mapaString+=("R | ");
 			}
-			//removemos | ao final da linha
+			//removemos | ao final da linha. (removeLastChar do stackoverflow)
 			comprimento=mapaString.length();
 			mapaString=mapaString.substring(0,comprimento-2);
 			//nova linha para nova fila
@@ -105,7 +105,6 @@ public class reservas {
 		//indice 0 para livre (valor 0 no mapa)
 		//indice 1 para reservado (valor negativo no mapa)
 		//indice 2 para comprado (valor positivo no mapa)
-		
 		for (int f=0; f<max_filas; f++)
 			for (int l=0; l<max_lugares; l++)
 				if (mapa[f][l]==0)              // lugares livres. igual a zero.
@@ -136,12 +135,11 @@ public class reservas {
 			
 		//******************** salas.txt ****************************************
 		// salas.txt : le dados do ficheiro
+                // layout do try catch: https://docs.oracle.com/javase/tutorial/essential/exceptions/catch.html
 		Scanner scanner;
 		try	{
 		    scanner = new Scanner( new File("salas.txt") ).useDelimiter( "\\s*:\\s*|\\s*\n\\s*" );
-		}
-		catch( FileNotFoundException ex )
-		{
+		} catch( FileNotFoundException ex ) {
 		    System.out.println( ex );
 		    return;
 		}
@@ -175,19 +173,17 @@ public class reservas {
 
 		//********************* reservas.txt **************************************                
 		// reservas.txt : le dados do ficheiro
+                // layout do try catch: https://docs.oracle.com/javase/tutorial/essential/exceptions/catch.html
 		Scanner scannerReservas;
 		try {
 		    scannerReservas = new Scanner( new File("reservas.txt") ).useDelimiter( "\\s*:\\s*|\\s*\n\\s*" );
-		}
-		catch( FileNotFoundException ex )
-		{
+		} catch( FileNotFoundException ex ) {
 		    System.out.println( ex );
 		    return;
 		}
 		scannerReservas.skip( "\\s*" );
 		
 		// reservas.txt: separa o conteudo da variavel scanner em arrays diferentes.
-		//System.out.println("*** reservas ***");
 		for( j = 0;  scannerReservas.hasNextLine();  j++ ){
 		    reservaIdSala[j] = scannerReservas.nextInt();           //coluna1
 		    reservaNomeCliente[j] = scannerReservas.next();         //coluna2
@@ -203,21 +199,21 @@ public class reservas {
 		}
 		
 		// reservas.txt : output para ecra
+//                System.out.println("*** reservas.txt ***");
 //		for( i = 0;  i < num_reservas ;  i++ ){
 //		    System.out.print  ( "L" + i + ":\t") ;
-//		    System.out.print  ( "C1:" + reservaIdSala[i]          + "\t");
-//		    System.out.print  ( "C2:" + reservaNomeCliente[i]		+ "\t");
-//		    System.out.print  ( "C3:" + reservaCondicao[i]        + "\t");
-//		    System.out.print  ( "C4:" + reservaFila[i]            + "\t");
-//		    System.out.print  ( "C5:" + reservaLugar[i]           + "\t");
-//		    System.out.print  ( "C6:" + reservaDia[i]             + "\t");
-//		    System.out.print  ( "C7:" + reservaMes[i]             + "\t");
-//		    System.out.println( "C8:" + reservaSessao[i]          + "\t");
+//		    System.out.print  ( "C1:" + reservaIdSala[i]            + "\t");
+//		    System.out.print  ( "C2:" + reservaNomeCliente[i]       + "\t");
+//		    System.out.print  ( "C3:" + reservaCondicao[i]          + "\t");
+//		    System.out.print  ( "C4:" + reservaFila[i]              + "\t");
+//		    System.out.print  ( "C5:" + reservaLugar[i]             + "\t");
+//		    System.out.print  ( "C6:" + reservaDia[i]               + "\t");
+//		    System.out.print  ( "C7:" + reservaMes[i]               + "\t");
+//		    System.out.println( "C8:" + reservaSessao[i]            + "\t");
 //		}
 		
 		//*********************** Output ****************************
-		
-		//Criando lista de clientes
+		//Criação de lista de clientes
 		for (i=0; i<num_reservas; i++) {
 			if (procuraCliente(reservaNomeCliente[i])==-1) {
 				clientesNome[num_clientes]=reservaNomeCliente[i];
@@ -230,16 +226,14 @@ public class reservas {
 //                for (i=0; i<num_clientes; i++)
 //			System.out.println(clientesNome[i]);
 
-                String output_total= "";    // inicializa variavel output_total
+                String output_total= "";
 		
 		int[][] mapa = new int[100][100];
 		int fila, max_filas;
 		int lugar, max_lugares;
 		
-                //codigo de totalreceitas
+                //totais globais
                 int totalReceitaVendidos = 0; 
-                
-                // codigo de totalreceitas estimado
                 int totalReceitaEstimado = 0;
                 
 		int idCliente;
@@ -290,7 +284,7 @@ public class reservas {
 						}
 						
 						if (reservaEncontrada) {
-							//criamos e inizializamo o array que vai conter a contagem
+							//criamos e inizializamos o array que vai conter a contagem
 							//de lugares vagos (0) reservas (1) comprados (2)
 							int[] countEstado;
 							String output="";
