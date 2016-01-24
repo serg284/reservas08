@@ -370,7 +370,8 @@ public class reservas {
                                                         output_total+=(totalReceitaVendidos +" | " +  totalReceitaEstimado);
                                                         
 							escreveOutput(output_total);
-                                                        System.out.println(output_total);
+                                                        //*** mostra o resultado no ecra ***
+                                                        //System.out.println(output_total);
                                                         
                                                         //nota: http://stackoverflow.com/questions/3715967/when-should-we-call-system-exit-in-java
                                                         System.exit(0);
