@@ -5,9 +5,13 @@ import java.io.*;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Calendar;
+import java.text.SimpleDateFormat;
 
 
 public class reservas {
+ 
+
 
 	//************************ Variaveis ***********************
 	//arrays de salas.txt
@@ -43,7 +47,7 @@ public class reservas {
         //source: http://stackoverflow.com/questions/2683324/java-char-array-to-int
 	private static int charParaInt(char numeroChar) {
 		return (int)  Integer.parseInt(String.valueOf(numeroChar));
-                //outro metodo, usando substituição de unicode: return (int) numeroChar-'0';
+                //outro metodo, usando substituicao de unicode: return (int) numeroChar-'0';
         }
 
 	//Dado um codigo de sessao em char devolve o equivalente numerico
@@ -54,7 +58,7 @@ public class reservas {
 		case 'T': return 1;
 		case 'N': return 2;
 		}
-		return -1; //Erro. tipo de sessão não esperada.
+		return -1; //Erro. tipo de sessÃ£o nao esperada.
 	}
 
 	//Dado um codigo de sessao em int devolve o equivalente em char
@@ -66,14 +70,14 @@ public class reservas {
 		}
 		return '\0'; //Char 0 se Erro
 	}
-
+ 
 	//Dado um nome de cliente devolve o seu id
 	//o id E o indice no array de clientes + 1
 	//Nao podemos devolver o indice porque pode ser 0 . 0 vai ser utilizado para representar lugar livre
         //source: http://stackoverflow.com/questions/513832/how-do-i-compare-strings-in-java
 	private static int procuraCliente(String nomeCliente) {
 		for (int c=0; c<num_clientes; c++) {
-			if (clientesNome[c].equals(nomeCliente))  // em string, uma comparação é com equals, à semelhança de == em int
+			if (clientesNome[c].equals(nomeCliente))  // em string, uma comparacao e com equals, a semelhanca de == em int
 				return c+1;
 		}
 		return -1; //Erro. Cliente nao encontrado
@@ -129,18 +133,29 @@ public class reservas {
 	}
 	
 	//Funcao que recebe os calculos e os escreve num ficheiro
+        //nota: ficheiro criado em UTF8, de acordo com instruções de FP pratica, aula13. temos de abrir com notepad++, que reconhece utf-8.
+        //nota: documentação em utf-8: https://en.wikipedia.org/wiki/UTF-8 . character encoding em unicode.
 	private static void escreveOutput(String outputParaFicheiro) {
                 //source: http://stackoverflow.com/questions/2885173/how-to-create-a-file-and-write-to-a-file-in-java
                 PrintWriter writer = null;
                 try {
-                    writer = new PrintWriter("output.txt", "UTF-8");
+                    writer = new PrintWriter("resultados" + now() + ".txt", "UTF-8");
                 } catch (Exception e) {
                     System.out.println(e);
                 }
                 writer.println(outputParaFicheiro);
                 writer.close();
 	}
-	
+        
+        //Função que prepara a data e hora atual
+        //source: enunciado do trabalho. formato da data modificado para corresponder ao pedido.
+        public static final String DATE_FORMAT = "yyyyMMddHHmmss";
+                public static String now() {
+                Calendar cal = Calendar.getInstance();
+                SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+                return sdf.format(cal.getTime());
+        }
+    
 	public static void main(String[] args) {
 		int i, j;
 		//******************** salas.txt ****************************************
@@ -156,7 +171,7 @@ public class reservas {
 		scanner.skip( "\\s*" );
 		
 		//salas.txt: separa o conteudo da variavel scanner em arrays diferentes.
-                //nota: i=1 porque não existe sala 0! 
+                //nota: i=1 porque nao existe sala 0! 
 		for( i = 1;  scanner.hasNextLine();  i++ ){
 		    salaIdSala[i]         = scanner.nextInt();      //coluna1
 		    salaNomeSala[i]       = scanner.next();         //coluna2
@@ -169,7 +184,7 @@ public class reservas {
 		    num_salas++;
 		}
 
-		// salas.txt : output para ecra. comentado.
+		// salas.txt : output para ecra.
 		//System.out.println("*** salas ***");
 		//System.out.println("\tC1:idSala \tC2:nomeSala \tC3:fila \tC4:lugares \tC5:nomeEspetaculo \tC6:precoBilhete");
 		//for( i = 0;  i < num_salas;  i++ ){
@@ -222,12 +237,9 @@ public class reservas {
 //		    System.out.print  ( "C7:" + reservaMes[i]               + "\t");
 //		    System.out.println( "C8:" + reservaSessao[i]            + "\t");
 //		}
-		
 		//*********************** Output ****************************
-
-          
                 
-		//Criação de lista de clientes
+		//Criacaoo de lista de clientes
 		for (i=0; i<num_reservas; i++) {
 			if (procuraCliente(reservaNomeCliente[i])==-1) {
 				clientesNome[num_clientes]=reservaNomeCliente[i];
@@ -256,28 +268,28 @@ public class reservas {
 		int reservasProcessadas=0;
 		
 		for (int sala=1; sala<=num_salas; sala++) {
-			max_filas=salaFilas[sala];
-			max_lugares=salaLugares[sala];
-			for (int mes=1; mes<=12; mes++) {
-				for (int dia=1; dia<=31; dia++) {
-					for (int sessao=0; sessao<3; sessao++) {
+			max_filas=salaFilas[sala];   //maximofilas vem da parte do array das salasfilas
+			max_lugares=salaLugares[sala];   //maximolugares vem da parte do array das salaslugares
+			for (int mes=1; mes<=12; mes++) { // ve os meses todos ate ser o mes 12
+				for (int dia=1; dia<=31; dia++) {  // vai ver os dias todos ate ser dia 31 (nao limita meses com < 30 dias)
+					for (int sessao=0; sessao<3; sessao++) {  // para os tres tipos de sessao (manha.tarde.noite)
 						//inicializar mapa a zeros (lugares vazios)
 						for (i=0; i<100; i++)
 							for (j=0; j<100; j++)
-								mapa[i][j]=0;
+								mapa[i][j]=0; //matriz de maximo 100 por 100
 						
-						for (int r=0; r<num_reservas; r++) {
-							if ( 	reservaIdSala[r]==sala &&
-									reservaMes[r]==mes &&
-									reservaDia[r]==dia &&
-									sessaoNumero(reservaSessao[r])==sessao ) {
+						for (int r=0; r<num_reservas; r++) {    // num_reservas e o numero de linhas no file reservas.txt
+							if ( 	reservaIdSala[r]==sala && // reservaidsala e o numero que vai corresponder a cor da sala
+									reservaMes[r]==mes && //reservames vai ser comparado ao mes que estamos
+									reservaDia[r]==dia && // reservadia vai ser comparada ao dia em que se mete
+									sessaoNumero(reservaSessao[r])==sessao ) { //sessaonumero vai ser numeros q comparam a sessao(0=M,1=T,2=N)
 								
 								reservasProcessadas++;
-								reservaEncontrada=true;
+								reservaEncontrada=true;// se encontra reserva  
 								
 								idCliente=procuraCliente(reservaNomeCliente[r]);
-								fila=reservaFila[r]-1;
-								lugar=reservaLugar[r]-1;
+								fila=reservaFila[r]-1; // fila-1 pois n ha fila0 ( posicao0=posicaofila1 )
+								lugar=reservaLugar[r]-1;// lugar-1 pois n ha lugar0 (posicao0=posicaolugar1 )
 								
 								switch (reservaCondicao[r]) {
 								case 'A':
@@ -328,9 +340,9 @@ public class reservas {
 								clienteReservas=procuraReservas(mapa, max_filas, max_lugares, c);
 								
 								if (!clienteReservas.isEmpty()) {
-                                                                        //O C=1 começa com a posição de array 0.
-                                                                        //O cliente tem de ser como 1 pois não ha cliente 0.
-                                                                        //Para começarmos com o posiçao 0 temos de fazer c-1 pois (1-1)=0
+                                                                        //O C=1 comeca com a posicao de array 0.
+                                                                        //O cliente tem de ser como 1 pois nao ha cliente 0.
+                                                                        //Para comecarmos com o posicao 0 temos de fazer c-1 pois (1-1)=0
 									output += clientesNome[c-1] + " | Reserva" + clienteReservas + "\n";
 								}
 							}
@@ -354,14 +366,11 @@ public class reservas {
 						reservaEncontrada=false;
 						if (reservasProcessadas==num_reservas) {
 							//<Receita Total> | <Estimativa Total>
-                                                        //codigo de todas as sessões:calcula o total de receitascompradas | receitas compradas + reservadas 
+                                                        //codigo de todas as sessoes:calcula o total de receitascompradas | receitas compradas + reservadas 
                                                         output_total+=(totalReceitaVendidos +" | " +  totalReceitaEstimado);
                                                         
 							escreveOutput(output_total);
-                                                        
-                                                        
                                                         System.out.println(output_total);
-                                                        
                                                         
                                                         //nota: http://stackoverflow.com/questions/3715967/when-should-we-call-system-exit-in-java
                                                         System.exit(0);
