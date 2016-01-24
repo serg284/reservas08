@@ -3,10 +3,12 @@ package reservas21;
 
 import java.io.*;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class reservas {
-    
+
 	//************************ Variaveis ***********************
 	//arrays de salas.txt
 	private static int[]     salaIdSala = new int[100];                 //coluna1
@@ -35,7 +37,7 @@ public class reservas {
 	private static int num_salas = 0;
 	private static int num_reservas = 0;
 	private static int num_clientes =0;
-	
+
 	//********************** Funcoes ***************************
 	//Converte um char array em int, vamos usar nas reservas multiplas, em digito
         //source: http://stackoverflow.com/questions/2683324/java-char-array-to-int
@@ -54,7 +56,7 @@ public class reservas {
 		}
 		return -1; //Erro. tipo de sessão não esperada.
 	}
-	
+
 	//Dado um codigo de sessao em int devolve o equivalente em char
 	private static char sessaoChar(int sessaoInt) {
 		switch (sessaoInt) {
@@ -64,7 +66,7 @@ public class reservas {
 		}
 		return '\0'; //Char 0 se Erro
 	}
-	
+
 	//Dado um nome de cliente devolve o seu id
 	//o id E o indice no array de clientes + 1
 	//Nao podemos devolver o indice porque pode ser 0 . 0 vai ser utilizado para representar lugar livre
@@ -76,7 +78,7 @@ public class reservas {
 		}
 		return -1; //Erro. Cliente nao encontrado
 	}
-        
+
 	//Devolve uma String com a representacao do mapa de uma sala
 	private static String imprimirMapa(int[][] mapa, int f_max, int l_max) {
 		String mapaString="";
@@ -128,11 +130,19 @@ public class reservas {
 	
 	//Funcao que recebe os calculos e os escreve num ficheiro
 	private static void escreveOutput(String output) {
+                //source: http://stackoverflow.com/questions/2885173/how-to-create-a-file-and-write-to-a-file-in-java
+                PrintWriter writer = null;
+                try {
+                    writer = new PrintWriter("output.txt", "UTF-8");
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+                writer.println(output);
+                writer.close();
 	}
 	
 	public static void main(String[] args) {
 		int i, j;
-			
 		//******************** salas.txt ****************************************
 		// salas.txt : le dados do ficheiro
                 // layout do try catch: https://docs.oracle.com/javase/tutorial/essential/exceptions/catch.html
@@ -153,22 +163,22 @@ public class reservas {
 		    salaLugares[i]        = scanner.nextInt();      //coluna4
 		    salaNomeEspetaculo[i] = scanner.next();         //coluna5
 		    salaPrecoBilhete[i]   = scanner.nextInt();      //coluna6
-		
+
 		    scanner.skip( "\\s*" );
 		    num_salas++;
 		}
-		
+
 		// salas.txt : output para ecra. comentado.
 		//System.out.println("*** salas ***");
 		//System.out.println("\tC1:idSala \tC2:nomeSala \tC3:fila \tC4:lugares \tC5:nomeEspetaculo \tC6:precoBilhete");
 		//for( i = 0;  i < num_salas;  i++ ){
 		//    System.out.print  ( "L" + i + ":\t") ;
-		//    System.out.print  ( "C1:" + salaIdSala[i]  +        "\t\t");
-		//    System.out.print  ( "C2:" + salaNomeSala[i] +      "\t");
-		//    System.out.print  ( "C3:" + salaFilas[i] +         "\t\t");
-		//    System.out.print  ( "C4:" + salaLugares[i] +       "\t\t");
-		//    System.out.print  ( "C5:" + salaNomeEspetaculo[i] + "\t\t");
-		//    System.out.println( "C6:" + salaPrecoBilhete[i]  +  "\t");
+		//    System.out.print  ( "C1:" + salaIdSala[i]  +          "\t\t");
+		//    System.out.print  ( "C2:" + salaNomeSala[i] +         "\t");
+		//    System.out.print  ( "C3:" + salaFilas[i] +            "\t\t");
+		//    System.out.print  ( "C4:" + salaLugares[i] +          "\t\t");
+		//    System.out.print  ( "C5:" + salaNomeEspetaculo[i] +   "\t\t");
+		//    System.out.println( "C6:" + salaPrecoBilhete[i]  +    "\t");
 		//}
 
 		//********************* reservas.txt **************************************                
@@ -182,7 +192,7 @@ public class reservas {
 		    return;
 		}
 		scannerReservas.skip( "\\s*" );
-		
+
 		// reservas.txt: separa o conteudo da variavel scanner em arrays diferentes.
 		for( j = 0;  scannerReservas.hasNextLine();  j++ ){
 		    reservaIdSala[j] = scannerReservas.nextInt();           //coluna1
@@ -193,11 +203,11 @@ public class reservas {
 		    reservaDia[j]    = scannerReservas.nextInt();           //coluna6
 		    reservaMes[j]   = scannerReservas.nextInt();            //coluna7
 		    reservaSessao[j] = scannerReservas.next().charAt(0);    //coluna8
-		
+
 		    scannerReservas.skip( "\\s*" );
 		    num_reservas++;
 		}
-		
+
 		// reservas.txt : output para ecra
 //                System.out.println("*** reservas.txt ***");
 //		for( i = 0;  i < num_reservas ;  i++ ){
@@ -213,6 +223,9 @@ public class reservas {
 //		}
 		
 		//*********************** Output ****************************
+
+          
+                
 		//Criação de lista de clientes
 		for (i=0; i<num_reservas; i++) {
 			if (procuraCliente(reservaNomeCliente[i])==-1) {
@@ -285,7 +298,7 @@ public class reservas {
 						
 						if (reservaEncontrada) {
 							//criamos e inizializamos o array que vai conter a contagem
-							//de lugares vagos (0) reservas (1) comprados (2)
+							//de livres(0) reservas(1) comprados(2)
 							int[] countEstado;
 							String output="";
 							
@@ -304,7 +317,8 @@ public class reservas {
 							//Determinamos a contagem dos estados (livre, reservado, comprado)
 							countEstado = contarEstados(mapa, max_filas, max_lugares);
 							
-							//Contagem de lugares vagos
+							//Contagem de lugares livres
+                                                        //livres(0) reservas(1) comprados(2)
 							output += countEstado[0] + "\n";
 							
 							//Detalhes dos lugares reservados
@@ -313,6 +327,9 @@ public class reservas {
 								clienteReservas=procuraReservas(mapa, max_filas, max_lugares, c);
 								
 								if (!clienteReservas.isEmpty()) {
+                                                                        //O C=1 começa com a posição de array 0.
+                                                                        //O cliente tem de ser como 1 pois não ha cliente 0.
+                                                                        //Para começarmos com o posiçao 0 temos de fazer c-1 pois (1-1)=0
 									output += clientesNome[c-1] + " | Reserva" + clienteReservas + "\n";
 								}
 							}
@@ -328,21 +345,27 @@ public class reservas {
 							output += receitaVendidos + " | " + (receitaVendidos+receitaReservados);
 							
 							//<Linha em branco>
-							output += "\n";
-														
-							System.out.println(output);
+							output += "\n\n";
 							output_total+=output;
 						}
 						
+                         
 						reservaEncontrada=false;
 						if (reservasProcessadas==num_reservas) {
 							//<Receita Total> | <Estimativa Total>
-							//output_total += ...
-							
-							escreveOutput(output_total);
                                                         //codigo de todas as sessões:calcula o total de receitascompradas | receitas compradas + reservadas 
-							System.out.println(totalReceitaVendidos +" | " +  totalReceitaEstimado );
-							
+                                                        output_total+=(totalReceitaVendidos +" | " +  totalReceitaEstimado);
+                                                        
+							escreveOutput(output_total);
+                                                        
+                                                       
+                                                        
+                                                        
+                                                        
+                                                        System.out.println(output_total);
+                                                        
+                                                        
+                                                        //nota: http://stackoverflow.com/questions/3715967/when-should-we-call-system-exit-in-java
                                                         System.exit(0);
 						}
 					}
