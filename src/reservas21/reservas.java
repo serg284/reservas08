@@ -129,7 +129,7 @@ public class reservas {
 	}
 	
 	//Funcao que recebe os calculos e os escreve num ficheiro
-	private static void escreveOutput(String output) {
+	private static void escreveOutput(String outputParaFicheiro) {
                 //source: http://stackoverflow.com/questions/2885173/how-to-create-a-file-and-write-to-a-file-in-java
                 PrintWriter writer = null;
                 try {
@@ -137,7 +137,7 @@ public class reservas {
                 } catch (Exception e) {
                     System.out.println(e);
                 }
-                writer.println(output);
+                writer.println(outputParaFicheiro);
                 writer.close();
 	}
 	
@@ -155,7 +155,7 @@ public class reservas {
 		}
 		scanner.skip( "\\s*" );
 		
-		// salas.txt: separa o conteudo da variavel scanner em arrays diferentes.
+		//salas.txt: separa o conteudo da variavel scanner em arrays diferentes.
                 //nota: i=1 porque não existe sala 0! 
 		for( i = 1;  scanner.hasNextLine();  i++ ){
 		    salaIdSala[i]         = scanner.nextInt();      //coluna1
@@ -358,9 +358,6 @@ public class reservas {
                                                         output_total+=(totalReceitaVendidos +" | " +  totalReceitaEstimado);
                                                         
 							escreveOutput(output_total);
-                                                        
-                                                       
-                                                        
                                                         
                                                         
                                                         System.out.println(output_total);
