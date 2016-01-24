@@ -36,7 +36,7 @@ public class reservas {
 	//declara variaveis
 	private static int num_salas = 0;
 	private static int num_reservas = 0;
-	private static int num_clientes =0;
+	private static int num_clientes = 0;
 
 	//********************** Funcoes ***************************
 	//Converte um char array em int, vamos usar nas reservas multiplas, em digito
@@ -156,7 +156,8 @@ public class reservas {
 		scanner.skip( "\\s*" );
 		
 		// salas.txt: separa o conteudo da variavel scanner em arrays diferentes.
-		for( i = 0;  scanner.hasNextLine();  i++ ){
+                //nota: i=1 porque não existe sala 0! 
+		for( i = 1;  scanner.hasNextLine();  i++ ){
 		    salaIdSala[i]         = scanner.nextInt();      //coluna1
 		    salaNomeSala[i]       = scanner.next();         //coluna2
 		    salaFilas[i]          = scanner.nextInt();      //coluna3
