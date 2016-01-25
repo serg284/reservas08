@@ -58,7 +58,7 @@ public class reservas {
 		case 'T': return 1;
 		case 'N': return 2;
 		}
-		return -1; //Erro. tipo de sessÃ£o nao esperada.
+		return -1; //Erro. tipo de sessao nao esperada.
 	}
 
 	//Dado um codigo de sessao em int devolve o equivalente em char
@@ -72,40 +72,42 @@ public class reservas {
 	}
  
 	//Dado um nome de cliente devolve o seu id
-	//o id E o indice no array de clientes + 1
+	//id = indice no array de clientes + 1
 	//Nao podemos devolver o indice porque pode ser 0 . 0 vai ser utilizado para representar lugar livre
         //source: http://stackoverflow.com/questions/513832/how-do-i-compare-strings-in-java
+        
+        
 	private static int procuraCliente(String nomeCliente) {
-		for (int c=0; c<num_clientes; c++) {
+		for (int c=0; c<num_clientes; c++) { // num_clientes = numero de clientes que existem  
 			if (clientesNome[c].equals(nomeCliente))  // em string, uma comparacao e com equals, a semelhanca de == em int
-				return c+1;
+				return c+1; // se no caso do input da funcao(nomeCliente)ja existir, devolve c+1
 		}
-		return -1; //Erro. Cliente nao encontrado
+		return -1; //Erro. Cliente nao encontrado. Se nao tiver encontrado devolve -1
 	}
 
 	//Devolve uma String com a representacao do mapa de uma sala
 	private static String imprimirMapa(int[][] mapa, int f_max, int l_max) {
 		String mapaString="";
 		int comprimento;
-		for (int f=0; f<f_max; f++) {
-			for (int l=0; l<l_max; l++) {
-				if (mapa[f][l]==0)
-					mapaString+="L | ";
-				else if (mapa[f][l]>0)
-					mapaString+=("C | ");
+		for (int f=0; f<f_max; f++) { 
+			for (int l=0; l<l_max; l++) { 
+                                if (mapa[f][l]==0)
+					mapaString+="L | ";     //mostra a condicao L inicial em todos
+				else if (mapa[f][l]>0) 
+					mapaString+=("C | ");   // se posicao-> mapa[f][l]for maior que 0 , mostra comprado
 				else
-					mapaString+=("R | ");
+					mapaString+=("R | ");   // se posicao-> mapa[f][l] for menor que 0 , mostra reservado
 			}
+				
 			//removemos | ao final da linha. (removeLastChar do stackoverflow)
 			comprimento=mapaString.length();
 			mapaString=mapaString.substring(0,comprimento-2);
-			//nova linha para nova fila
-			mapaString+="\n";
+			mapaString+="\n";   //enter
 		}
 		return mapaString;
 	}
 	
-	//Funcao que conta o numero de lugares livres, reservas, e compras
+	//Funcao que conta o numero de lugares livres, reservas e compras
 	private static int[] contarEstados(int[][] mapa, int max_filas, int max_lugares) {
 		int[] count = {0,0,0};   // (livres, reservados, comprados)
 		//indice 0 para livre (valor 0 no mapa)
@@ -133,8 +135,8 @@ public class reservas {
 	}
 	
 	//Funcao que recebe os calculos e os escreve num ficheiro
-        //nota: ficheiro criado em UTF8, de acordo com instruções de FP pratica, aula13. temos de abrir com notepad++, que reconhece utf-8.
-        //nota: documentação em utf-8: https://en.wikipedia.org/wiki/UTF-8 . character encoding em unicode.
+        //nota: ficheiro criado em UTF8, de acordo com instrucoes de FP pratica, aula13. temos de abrir com notepad++, que reconhece utf-8.
+        //nota: documentacao em utf-8: https://en.wikipedia.org/wiki/UTF-8 . character encoding em unicode.
 	private static void escreveOutput(String outputParaFicheiro) {
                 //source: http://stackoverflow.com/questions/2885173/how-to-create-a-file-and-write-to-a-file-in-java
                 PrintWriter writer = null;
@@ -147,7 +149,7 @@ public class reservas {
                 writer.close();
 	}
         
-        //Função que prepara a data e hora atual
+        //Funcao que prepara a data e hora atual
         //source: enunciado do trabalho. formato da data modificado para corresponder ao pedido.
         public static final String DATE_FORMAT = "yyyyMMddHHmmss";
                 public static String now() {
@@ -239,10 +241,10 @@ public class reservas {
 //		}
 		//*********************** Output ****************************
                 
-		//Criacaoo de lista de clientes
-		for (i=0; i<num_reservas; i++) {
-			if (procuraCliente(reservaNomeCliente[i])==-1) {
-				clientesNome[num_clientes]=reservaNomeCliente[i];
+		//Criacao de lista de clientes
+		for (i=0; i<num_reservas; i++) { // num_reservas e o numero de linhas do reservas.txt
+			if (procuraCliente(reservaNomeCliente[i])==-1) { // procuramos o cliente. Se der -1, nao encontrou.
+				clientesNome[num_clientes]=reservaNomeCliente[i]; // Se nao encotrou, adicionamos.
 				num_clientes++;
 			}
 		}
@@ -288,8 +290,8 @@ public class reservas {
 								reservaEncontrada=true;// se encontra reserva  
 								
 								idCliente=procuraCliente(reservaNomeCliente[r]);
-								fila=reservaFila[r]-1; // fila-1 pois n ha fila0 ( posicao0=posicaofila1 )
-								lugar=reservaLugar[r]-1;// lugar-1 pois n ha lugar0 (posicao0=posicaolugar1 )
+								fila=reservaFila[r]-1; // fila-1 pois nao ha fila0 ( posicao0=posicaofila1 )
+								lugar=reservaLugar[r]-1;// lugar-1 pois nao ha lugar0 (posicao0=posicaolugar1 )
 								
 								switch (reservaCondicao[r]) {
 								case 'A':
