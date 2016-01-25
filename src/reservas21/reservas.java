@@ -1,5 +1,13 @@
 package reservas21;
 
+/****
+ * Trabalho executado pelos Alunos:
+ * -Hugo Matias Tching Nascimento, 21404242, hmnascimento@gmail.com, LEI
+ * -Rodrigo Miguel Cigarrilha Mil-homens, 21502085, rodas1000h@gmail.com, LEI
+ * -Sergio Antonio Torrao Ribeiro, 20081127, serg.ribeiro@gmail.com, LIG
+ *
+ * github: https://github.com/serg284/reservas08
+ *******/
 
 import java.io.*;
 import java.util.Scanner;
@@ -11,7 +19,6 @@ import java.text.SimpleDateFormat;
 
 public class reservas {
  
-
 
 	//************************ Variaveis ***********************
 	//arrays de salas.txt
